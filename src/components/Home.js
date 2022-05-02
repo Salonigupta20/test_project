@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import "./styles.css";
-import './App.css';
+import "../styles.css";
+import '../App.css';
 import SignIn from "./SignIn";
 import { Context as AuthContext } from '../context/auth-context';
 
