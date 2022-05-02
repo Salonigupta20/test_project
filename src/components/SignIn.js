@@ -6,10 +6,10 @@ export default function SignIn() {
     const { login } = useContext(AuthContext);
     const [uname,setUname] = useState('');
     const [pass,setPass] = useState('');
-
     const handleSubmit = (event) => {
         event.preventDefault();
-        login(uname, pass)
+        console.log(uname, pass)
+        login({ uname, pass })
     };
 
     return (<div className="form">
@@ -27,7 +27,7 @@ export default function SignIn() {
       <div className="input-container">
         <label>Password </label>
         <input
-            type="pasword"
+            type="password"
             name="pass"
             value={pass}
             onChange={(e) => setPass(e.target.value)}

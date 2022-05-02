@@ -12,6 +12,7 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case actionTypes.LOGIN: {
+      console.log(action)
       const { uname, pass } = action.payload;
       const userData = database.find((user) => user.username === uname);
       if(!userData || userData.password !== pass) return { ...state, isError: true };
@@ -25,7 +26,7 @@ const reducer = (state, action) => {
 
 
 const login = (dispatch) => ({ uname, pass }) => {
-  dispatch ({ type:actionTypes.LOGIN, payload: { uname, pass } })
+  dispatch({ type:actionTypes.LOGIN, payload: { uname, pass } })
 }
 const logout = (dispatch) => () => {
   dispatch({ type: actionTypes.LOGOUT })
