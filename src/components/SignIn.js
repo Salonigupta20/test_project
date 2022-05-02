@@ -3,7 +3,7 @@ import { Context as AuthContext } from '../context/auth-context';
 
 export default function SignIn() {
 
-    const { login } = useContext(AuthContext);
+    const { login, state } = useContext(AuthContext);
     const [uname,setUname] = useState('');
     const [pass,setPass] = useState('');
     const handleSubmit = (event) => {
@@ -38,5 +38,8 @@ export default function SignIn() {
         <input type="submit" />
       </div>
     </form>
+
+    { state.isError && <div> Invalid Credentials </div> }
+
   </div>)
 }
