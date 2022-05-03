@@ -6,20 +6,32 @@ const initialState = {
   isLoggedIn: false,
   isError: false,
   username: null,
-  password: null
+  password: null,
+  database
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
     case actionTypes.LOGIN: {
-      console.log(action)
       const { uname, pass } = action.payload;
-      const userData = database.find((user) => user.username === uname);
+      const userData = state.database.find((user) => user.username === uname);
       if(!userData || userData.password !== pass) return { ...state, isError: true };
-      return { isLoggedIn: true, isError: false, username: uname, password: pass }
+      return { ...state, isLoggedIn: true, isError: false, username: uname, password: pass }
     }
     case actionTypes.LOGOUT: {
-      return { ...initialState }
+      return {
+        ...state,
+        isLoggedIn: false,
+        isError: false,
+        username: null,
+        password: null
+      }
+    }
+    case actionTypes.REGISTER: {
+      return { ...state, database: [ ...state.database, { 
+        username: action.payload.uname,
+        password: action.payload.pass
+       } ] }
     }
   }
 };
@@ -32,6 +44,10 @@ const logout = (dispatch) => () => {
   dispatch({ type: actionTypes.LOGOUT })
 }
 
-const actionsObj = { login, logout };
+const register = (dispatch) => ({ uname, pass }) => {
+  dispatch({ type:actionTypes.REGISTER, payload: { uname, pass } })
+}
+
+const actionsObj = { login, logout,register };
 
 export const { Provider, Context } = createDataContext(reducer, actionsObj, initialState);

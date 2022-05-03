@@ -2,25 +2,20 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context as AuthContext } from '../context/auth-context';
 
-export default function SignIn() {
+export default function Register() {
 
-    const { login, state } = useContext(AuthContext);
+    const { register, state } = useContext(AuthContext);
     const [uname,setUname] = useState('');
     const [pass,setPass] = useState('');
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        login({ uname, pass });
+        register({ uname, pass });
+        navigate("/sign-in")
     };
 
-    useEffect(() => {
-        if (state.isLoggedIn) {
-            navigate("/successful")
-        }
-    }, [state.isLoggedIn])
-
     return (<div className="form">
-        <h3> Please Sign In </h3>
+        <h3> Register </h3>
     <form onSubmit={handleSubmit}>
       <div className="input-container">
         <label>Username </label>
@@ -46,8 +41,6 @@ export default function SignIn() {
         <input type="submit" />
       </div>
     </form>
-
-    { state.isError && <div> Invalid Credentials </div> }
 
   </div>)
 }
