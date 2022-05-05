@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import SignIn from "./components/SignIn";
 import Dashboard from "./components/Dashboard";
 import Register from "./components/Register";
+import AuthWrapper from "./components/AuthWrapper";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />}>
           <Route path="sign-in" element={<SignIn />} />
           <Route path="register" element={<Register />} />
-          <Route path="successful" element={<Dashboard />} />
+          <Route path="successful" element={<AuthWrapper><Dashboard /></AuthWrapper>} />
         </Route>
       </Routes>
     </Provider>
@@ -23,3 +24,4 @@ function App() {
 }
 
 export default App;
+ 

@@ -10,11 +10,11 @@ export default function() {
         navigate("/sign-in");
     }
 
-    useEffect(() => {
-        if (!state.isLoggedIn) {
-            navigate('/sign-in')
-        }
-    }, [state.isLoggedIn])
+    // useEffect(() => {
+    //     if (!state.isLoggedIn) {
+    //         navigate('/sign-in')
+    //     }
+    // }, [state.isLoggedIn])
 
     return (
     <>
