@@ -7,11 +7,18 @@ export default function Register() {
     const { register, state } = useContext(AuthContext);
     const [uname,setUname] = useState('');
     const [pass,setPass] = useState('');
+    const [showExistingUserError, setShowExistingUserError] = useState(false);
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        register({ uname, pass });
-        navigate("/sign-in")
+        const isExistingUser = state.database.find((user) => user.username === uname);
+        if(isExistingUser) {
+          setShowExistingUserError(true);
+        } else {
+          register({ uname, pass });
+          navigate("/sign-in")
+          setShowExistingUserError(false);
+        }
     };
 
     return (<div className="form">
@@ -41,6 +48,6 @@ export default function Register() {
         <input type="submit" />
       </div>
     </form>
-
+    { showExistingUserError && <div>User Alredy Exists</div> }
   </div>)
 }
